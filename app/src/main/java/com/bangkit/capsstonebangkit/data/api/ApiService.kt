@@ -1,0 +1,27 @@
+package com.bangkit.capsstonebangkit.data.api
+
+import com.bangkit.capsstonebangkit.data.api.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.http.*
+
+interface ApiService {
+
+    @Multipart
+    @POST("api/auth/signup")
+    suspend fun postRegister(@Part("username") username: RequestBody,
+                @Part("email") email: RequestBody,
+                @Part("password") password: RequestBody,
+                @Part image: MultipartBody.Part): Response<RegisterResponse>
+
+//    suspend fun postRegister(@Body request: RegisterRequest): Response<RegisterResponse>
+
+    @POST("api/auth/signin")
+    suspend fun postLogin(@Body request: LoginRequest): Response<LoginResponse>
+
+    @GET("api/checkToken")
+    suspend fun checkSession():Response<SessionResponse>
+
+}
