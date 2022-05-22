@@ -7,7 +7,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Response
 import java.io.IOException
 
-private const val cookiesKey = "appCookies"
+const val cookiesKey = "appCookies"
 
 class SendSavedCookiesInterceptor(private val context: Context) : Interceptor {
 

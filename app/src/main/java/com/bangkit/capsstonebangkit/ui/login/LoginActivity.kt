@@ -22,21 +22,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        loginViewModel.sessionResponse.observe(this){
-            when(it.status){
-                Status.LOADING->{}
-                Status.SUCCESS->{
-                    when(it.data?.code()){
-                        200->{
-                            binding.tvSession.text = "sudah login"
-                        }
-                    }
-                }
-                Status.ERROR->{}
-            }
-        }
-        loginViewModel.checkSession()
-
         loginViewModel.loginResponse.observe(this){
             when(it.status){
 
@@ -47,7 +32,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         //sukses
                         200 ->{
                             Toast.makeText(this, "sukses", Toast.LENGTH_SHORT).show()
-                            loginViewModel.checkSession()
                         }
                         //password salah
                         401 ->{
