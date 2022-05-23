@@ -7,13 +7,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
+import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.cookiesKey
 import com.bangkit.capsstonebangkit.databinding.ActivitySplashScreenBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.dashboard.DashboardActivity
 import com.bangkit.capsstonebangkit.ui.onboarding.OnBoardingActivity
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
@@ -25,6 +29,11 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //styling screen
+        val backgroundColor = ContextCompat.getColor(this, R.color.dark_2)
+        this.window.statusBarColor = backgroundColor
+        this.window.navigationBarColor = backgroundColor
 
         val cookies = HashSet<String>(
             PreferenceManager
@@ -57,6 +66,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                 Status.ERROR->{}
             }
         }
+
         splashViewModel.checkSession()
 
     }

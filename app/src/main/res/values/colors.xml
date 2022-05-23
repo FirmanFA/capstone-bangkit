@@ -11,4 +11,5 @@
     <color name="dark">#0C2233</color>
     <color name="light">#0A91AB</color>
     <color name="light_2">#FFC045</color>
+    <color name="light_2_70">#B3FFC045</color>
 </resources>
