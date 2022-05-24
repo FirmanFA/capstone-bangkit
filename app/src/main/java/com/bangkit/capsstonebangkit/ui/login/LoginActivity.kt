@@ -1,5 +1,6 @@
 package com.bangkit.capsstonebangkit.ui.login
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
@@ -16,6 +17,9 @@ import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.model.LoginRequest
 import com.bangkit.capsstonebangkit.databinding.ActivityLoginBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
+import com.bangkit.capsstonebangkit.ui.dashboard.DashboardActivity
+import com.bangkit.capsstonebangkit.ui.password.forget.ForgetPasswordActivity
+import com.bangkit.capsstonebangkit.ui.register.RegisterActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -44,6 +48,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         val registerText = TextUtils.concat(text1,span2)
 
         binding.tvCreateAccount.text = registerText
+
+        binding.tvCreateAccount.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
 
         //edittext styling
@@ -79,6 +88,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                         //sukses
                         200 ->{
                             Toast.makeText(this, "sukses", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this, DashboardActivity::class.java)
+                            startActivity(intent)
+                            finish()
                         }
                         //password salah
                         401 ->{
@@ -97,6 +109,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
         }
 
+        binding.tvForgetPassword.setOnClickListener {
+            val intent = Intent(this, ForgetPasswordActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.apply {
             btnLogin.setOnClickListener{
                 val email = etEmail.editText?.text.toString()
@@ -106,10 +123,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
         }
 
-//        binding.btnRegister.setOnClickListener {
-//            val intent = Intent(this, RegisterActivity::class.java)
-//            startActivity(intent)
-//        }
+        binding.imvBack.setOnClickListener {
+            finish()
+        }
 
     }
 

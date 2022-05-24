@@ -21,6 +21,14 @@ interface ApiService {
     @POST("api/auth/signin")
     suspend fun postLogin(@Body request: LoginRequest): Response<LoginResponse>
 
+    @POST("api/auth/reset-password-email")
+    suspend fun postForgetPassword(@Body request: ForgetPasswordRequest):
+            Response<ForgetPasswordResponse>
+
+    @POST("api/auth/update-password")
+    suspend fun postUpdatePassword(@Body request: UpdatePasswordRequest):
+            Response<UpdatePasswordResponse>
+
     @GET("api/checkToken")
     suspend fun checkSession():Response<SessionResponse>
 

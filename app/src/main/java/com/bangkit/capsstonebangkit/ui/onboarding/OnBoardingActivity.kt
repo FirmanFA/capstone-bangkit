@@ -8,6 +8,7 @@ import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.databinding.ActivityOnBoardingBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.login.LoginActivity
+import com.bangkit.capsstonebangkit.ui.register.RegisterActivity
 import com.google.android.material.tabs.TabLayoutMediator
 
 class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>() {
@@ -32,17 +33,12 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+        binding.btnRegister.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
 
         TabLayoutMediator(binding.tabOnboarding, binding.vpOnboarding) { _, _ ->}.attach()
-
-//        binding.btnLogout.setOnClickListener {
-//            PreferenceManager
-//                .getDefaultSharedPreferences(this)
-//                .edit()
-//                .clear()
-//                .apply()
-//        }
-
 
     }
 }

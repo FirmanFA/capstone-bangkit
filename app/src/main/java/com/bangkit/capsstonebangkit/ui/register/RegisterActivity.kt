@@ -8,10 +8,16 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextUtils
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.data.Status
@@ -38,12 +44,38 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.imvBack.setOnClickListener {
+            finish()
+        }
+
+        //setup textview login
+        val text1 = "Sudah punya akun?"
+        val text2 = "Login"
+        val lightColor = ContextCompat.getColor(this, R.color.light_2)
+        val textSize = resources.getDimensionPixelSize(R.dimen.register_text_size)
+
+
+        val span2 = SpannableString(text2)
+        span2.setSpan(AbsoluteSizeSpan(textSize), 0, text2.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
+        span2.setSpan(
+            ForegroundColorSpan(lightColor), 0, text2.length,
+            Spanned.SPAN_INCLUSIVE_INCLUSIVE
+        )
+
+        val registerText = TextUtils.concat(text1,span2)
+
+        binding.tvLogin.text = registerText
+
+        binding.tvLogin.setOnClickListener {
+            finish()
+        }
+
         if (imageUri==null){
 
             Glide.with(this).load(R.drawable.default_avatar).circleCrop().into(binding.imvPhotoProfile)
         }
 
-        binding.cvPhoto.setOnClickListener {
+        binding.imvUploadPhoto.setOnClickListener {
             if (PermissionUtils.isPermissionsGranted(this, getRequiredPermission()) {
                     requestPermissionLauncher.launch(getRequiredPermission())
                 }){
@@ -56,10 +88,12 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
 
                 Status.LOADING -> {
                     binding.pbRegister.visibility = View.VISIBLE
+                    binding.btnRegister.visibility = View.GONE
                 }
 
                 Status.SUCCESS -> {
                     binding.pbRegister.visibility = View.GONE
+                    binding.btnRegister.visibility = View.VISIBLE
                     when(it.data?.code()){
                         //sukses
                         200 ->{
@@ -80,6 +114,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
                 }
                 Status.ERROR ->{
                     binding.pbRegister.visibility = View.GONE
+                    binding.btnRegister.visibility = View.VISIBLE
                     Log.d("postregis", "onCreate: ${it.message}")
 
                 }
@@ -90,9 +125,9 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
 
         binding.apply {
             btnRegister.setOnClickListener{
-                val username = etUsername.text.toString()
-                val email = etEmail.text.toString()
-                val password = etPassword.text.toString()
+                val username = etUsername.editText?.text.toString()
+                val email = etEmail.editText?.text.toString()
+                val password = etPassword.editText?.text.toString()
 
                 val imageFile = if (imageUri==null){
                     val defaultPath = URIPathHelper.getPath(this@RegisterActivity,
