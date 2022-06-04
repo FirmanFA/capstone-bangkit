@@ -1,9 +1,11 @@
 package com.bangkit.capsstonebangkit.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.preference.PreferenceManager
 import com.bangkit.capsstonebangkit.databinding.ActivityDashboardBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
+import com.bangkit.capsstonebangkit.ui.camera.CameraActivity
 
 class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
@@ -21,6 +23,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
                 .apply()
 
             finish()
+        }
+
+        binding.btnCamera.setOnClickListener {
+            val intent = Intent(this, CameraActivity::class.java)
+            startActivity(intent)
         }
 
 

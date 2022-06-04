@@ -88,7 +88,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
 
                 Status.LOADING -> {
                     binding.pbRegister.visibility = View.VISIBLE
-                    binding.btnRegister.visibility = View.GONE
+                    binding.btnRegister.visibility = View.INVISIBLE
                 }
 
                 Status.SUCCESS -> {
