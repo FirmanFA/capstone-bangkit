@@ -28,4 +28,6 @@ class UserRepository(private val apiHelper: ApiHelper) {
 
     suspend fun checkSession() = apiHelper.checkSession()
 
+    suspend fun getProfile() = apiHelper.getProfile()
+
 }

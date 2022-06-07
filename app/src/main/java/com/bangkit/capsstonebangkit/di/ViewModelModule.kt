@@ -1,5 +1,6 @@
 package com.bangkit.capsstonebangkit.di
 
+import com.bangkit.capsstonebangkit.ui.dashboard.DashboardViewModel
 import com.bangkit.capsstonebangkit.ui.login.LoginViewModel
 import com.bangkit.capsstonebangkit.ui.password.forget.ForgetPasswordViewModel
 import com.bangkit.capsstonebangkit.ui.password.update.UpdatePasswordViewModel
@@ -14,4 +15,5 @@ val viewModelModule = module {
     viewModelOf(::SplashViewModel)
     viewModelOf(::ForgetPasswordViewModel)
     viewModelOf(::UpdatePasswordViewModel)
+    viewModelOf(::DashboardViewModel)
 }

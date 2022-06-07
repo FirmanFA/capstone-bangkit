@@ -32,4 +32,7 @@ interface ApiService {
     @GET("api/checkToken")
     suspend fun checkSession():Response<SessionResponse>
 
+    @GET("api/profile")
+    suspend fun getProfile(): Response<ProfileResponse>
+
 }

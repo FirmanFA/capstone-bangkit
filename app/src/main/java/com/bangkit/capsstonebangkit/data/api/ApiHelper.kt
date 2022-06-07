@@ -1,11 +1,9 @@
 package com.bangkit.capsstonebangkit.data.api
 
-import com.bangkit.capsstonebangkit.data.api.model.ForgetPasswordRequest
-import com.bangkit.capsstonebangkit.data.api.model.LoginRequest
-import com.bangkit.capsstonebangkit.data.api.model.RegisterRequest
-import com.bangkit.capsstonebangkit.data.api.model.UpdatePasswordRequest
+import com.bangkit.capsstonebangkit.data.api.model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Response
 
 class ApiHelper(private val apiService: ApiService) {
 
@@ -25,5 +23,7 @@ class ApiHelper(private val apiService: ApiService) {
         apiService.postUpdatePassword(request)
 
     suspend fun checkSession() = apiService.checkSession()
+
+    suspend fun getProfile() = apiService.getProfile()
 
 }

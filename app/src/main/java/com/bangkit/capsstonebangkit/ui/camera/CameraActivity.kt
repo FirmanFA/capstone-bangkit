@@ -13,7 +13,9 @@ import androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toFile
+import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.application.MyApp
 import com.bangkit.capsstonebangkit.databinding.ActivityCameraBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
@@ -59,13 +61,14 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         binding.btnKlik.setOnClickListener {
-            val outputFileOptions = ImageCapture.OutputFileOptions.Builder(File.createTempFile("IMG",".jpg")).build()
+            val outputFileOptions =
+                ImageCapture.OutputFileOptions.Builder(File.createTempFile("IMG", ".jpg")).build()
             imageCapture?.takePicture(outputFileOptions, cameraExecutor,
                 object : ImageCapture.OnImageSavedCallback {
-                    override fun onError(error: ImageCaptureException)
-                    {
+                    override fun onError(error: ImageCaptureException) {
                         Toast.makeText(this@CameraActivity, "coba lagi", Toast.LENGTH_SHORT).show()
                     }
+
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         Log.d(TAG, "onImageSaved: ${outputFileResults.savedUri}")
                         //do request to api
@@ -76,13 +79,33 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
 
     }
 
-    fun detectFace(imageProxy: ImageProxy, inputImage: InputImage){
+    fun detectFace(imageProxy: ImageProxy, inputImage: InputImage) {
         detector.process(inputImage)
             .addOnSuccessListener { faces ->
 
                 imageProxy.close()
 
-                binding.btnKlik.isEnabled = faces.size != 0
+//                binding.btnKlik.isEnabled = faces.size != 0
+
+                if (faces.size == 0) {
+                    //disabled
+
+                    binding.btnKlik.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.camera_button_inactive,
+                        this.theme
+                    )
+                    binding.btnKlik.isEnabled = false
+
+                }else{
+                    binding.btnKlik.background = ResourcesCompat.getDrawable(
+                        resources,
+                        R.drawable.dashboard_nav_bar_button_background,
+                        this.theme
+                    )
+                    binding.btnKlik.isEnabled = true
+                }
+
 
             }
             .addOnFailureListener { e ->
@@ -127,7 +150,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                     this, cameraSelector, preview, imageCapture, imageAnalyzer
                 )
 
-            } catch(exc: Exception) {
+            } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)
             }
 
@@ -141,7 +164,8 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
 
             val mediaImage = imageProxy.image
             if (mediaImage != null) {
-                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                val image =
+                    InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
                 detectFace(imageProxy, image)
             }
 
@@ -158,9 +182,11 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
             if (allPermissionsGranted()) {
                 startCamera()
             } else {
-                Toast.makeText(this,
+                Toast.makeText(
+                    this,
                     "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT).show()
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -168,7 +194,8 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
-            baseContext, it) == PackageManager.PERMISSION_GRANTED
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     override fun onDestroy() {
@@ -180,7 +207,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
         private const val TAG = "CameraXApp"
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS =
-            mutableListOf (
+            mutableListOf(
                 Manifest.permission.CAMERA
             ).apply {
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {

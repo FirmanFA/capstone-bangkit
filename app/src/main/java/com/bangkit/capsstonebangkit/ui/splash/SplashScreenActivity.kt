@@ -14,6 +14,7 @@ import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.cookiesKey
 import com.bangkit.capsstonebangkit.databinding.ActivitySplashScreenBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
+import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
 import com.bangkit.capsstonebangkit.ui.dashboard.DashboardActivity
 import com.bangkit.capsstonebangkit.ui.onboarding.OnBoardingActivity
 import kotlinx.coroutines.GlobalScope

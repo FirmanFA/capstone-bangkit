@@ -1,9 +1,7 @@
 package com.bangkit.capsstonebangkit.ui.onboarding
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.preference.PreferenceManager
 import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.databinding.ActivityOnBoardingBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
