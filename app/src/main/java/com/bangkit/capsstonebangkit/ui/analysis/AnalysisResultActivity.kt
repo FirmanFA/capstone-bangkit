@@ -19,5 +19,6 @@ class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
 
         binding.sbHangingEyes.progress = 30
 
+
     }
 }

@@ -7,10 +7,12 @@ import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.data.Status
+import com.bangkit.capsstonebangkit.data.api.model.CommunityResponse
 import com.bangkit.capsstonebangkit.databinding.ActivityDashboardBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
 import com.bangkit.capsstonebangkit.ui.camera.CameraActivity
+import com.bangkit.capsstonebangkit.ui.community.CommunityActivity
 import com.bangkit.capsstonebangkit.ui.community.create.CreateCommunityActivity
 import com.bangkit.capsstonebangkit.utils.HorizontalMarginItemDecoration
 import com.bumptech.glide.Glide
@@ -27,9 +29,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         dashboardViewModel.profileResponse.observe(this){
-
 
             when(it.status){
 
@@ -56,7 +56,28 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
         }
 
+        dashboardViewModel.communityResponse.observe(this){
+            when(it.status){
+
+                Status.LOADING -> {}
+
+                Status.SUCCESS -> {
+                    when(it.data?.code()){
+                        //sukses
+                        200 ->{
+                            showCommunityList(it.data.body()?.communities)
+                        }
+
+                    }
+                }
+
+                Status.ERROR ->{}
+
+            }
+        }
+
         dashboardViewModel.getProfile()
+        dashboardViewModel.getCommunities()
 
 
 //        binding.button.setOnClickListener {
@@ -99,7 +120,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
         binding.btnRehatHelp.setOnClickListener {
-            val intent = Intent(this, AnalysisResultActivity::class.java)
+            val intent = Intent(this, CommunityActivity::class.java)
             startActivity(intent)
         }
         binding.btnRehatEdukasi.setOnClickListener {
@@ -108,6 +129,15 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
 
+    }
+
+    private fun showCommunityList(communities: List<CommunityResponse.Community>?) {
+        val adapter= CommunityAdapter {
+//            val action = HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(it.id)
+//            findNavController().navigate(action)
+        }
+        adapter.submitList(communities)
+        binding.rvCommunity.adapter = adapter
     }
 
     override fun onBackPressed() {

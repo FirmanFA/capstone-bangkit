@@ -2,6 +2,7 @@ package com.bangkit.capsstonebangkit.ui.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +20,7 @@ import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.application.MyApp
 import com.bangkit.capsstonebangkit.databinding.ActivityCameraBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
+import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
@@ -74,6 +76,9 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                         //do request to api
                     }
                 })
+
+            val intent = Intent(this, AnalysisResultActivity::class.java)
+            startActivity(intent)
         }
 
 

@@ -150,7 +150,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cl_rehat_edukasi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_community">
+                app:layout_constraintTop_toBottomOf="@id/cv_community">
 
                 <ImageView
                     android:layout_width="120dp"
@@ -287,15 +287,93 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tab_dashboard_banner"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_community"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_community"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:cardBackgroundColor="#33F5FEFF"
+                app:cardCornerRadius="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_community" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_community">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/dark_2">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/tv_community_header"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:layout_marginHorizontal="16dp"
+                                android:text="Daftar Komunitasmu"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                app:layout_constraintBottom_toTopOf="@+id/textView11"
+                                app:layout_constraintEnd_toStartOf="@id/img_fist"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/img_fist" />
+
+                            <TextView
+                                android:id="@+id/textView11"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:layout_marginHorizontal="16dp"
+                                android:text="Pantau komunitasmu"
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/img_fist"
+                                app:layout_constraintEnd_toStartOf="@id/img_fist"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/tv_community_header"
+                                app:layout_constraintVertical_bias="0.0" />
+
+                            <ImageView
+                                android:id="@+id/img_fist"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_marginVertical="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:src="@drawable/fist_image"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_community"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"/>
+
+                </LinearLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

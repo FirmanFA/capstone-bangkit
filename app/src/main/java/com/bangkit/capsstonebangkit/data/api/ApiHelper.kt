@@ -4,6 +4,8 @@ import com.bangkit.capsstonebangkit.data.api.model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 class ApiHelper(private val apiService: ApiService) {
 
@@ -25,5 +27,14 @@ class ApiHelper(private val apiService: ApiService) {
     suspend fun checkSession() = apiService.checkSession()
 
     suspend fun getProfile() = apiService.getProfile()
+
+    //community
+    suspend fun getCommunities() = apiService.getCommunities()
+
+    suspend fun createCommunity(request: CommunityCreateRequest) =
+        apiService.createCommunity(request)
+
+    suspend fun joinCommunity(request: CommunityJoinRequest) =
+        apiService.joinCommunity(request)
 
 }
