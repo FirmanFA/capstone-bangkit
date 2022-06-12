@@ -6,6 +6,7 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Part
 
 class ApiHelper(private val apiService: ApiService) {
 
@@ -28,8 +29,13 @@ class ApiHelper(private val apiService: ApiService) {
 
     suspend fun getProfile() = apiService.getProfile()
 
+    //analysis
+    suspend fun postPredict(image: MultipartBody.Part) = apiService.postPredict(image)
+
     //community
     suspend fun getCommunities() = apiService.getCommunities()
+
+    suspend fun getDetailCommunity(id: Int) = apiService.getDetailCommunity(id)
 
     suspend fun createCommunity(request: CommunityCreateRequest) =
         apiService.createCommunity(request)

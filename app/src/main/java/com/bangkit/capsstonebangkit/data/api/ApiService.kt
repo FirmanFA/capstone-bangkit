@@ -36,9 +36,18 @@ interface ApiService {
     @GET("api/profile")
     suspend fun getProfile(): Response<ProfileResponse>
 
+    //analysis
+    @Multipart
+    @POST("api/predict")
+    suspend fun postPredict(@Part image: MultipartBody.Part): Response<PredictResponse>
+
     //community
     @GET("api/communities")
     suspend fun getCommunities(): Response<CommunityResponse>
+
+    @GET("api/dataCommunity/{id}")
+    suspend fun getDetailCommunity(@Path("id") id: Int): Response<CommunityDetailResponse>
+
 
     @POST("api/createCommunity")
     suspend fun createCommunity(@Body request: CommunityCreateRequest):
@@ -46,6 +55,8 @@ interface ApiService {
 
     @POST("api/joinCommunity")
     suspend fun joinCommunity(@Body request: CommunityJoinRequest):
-            Response<CommunityCreateResponse>
+            Response<CommunityJoinResponse>
+
+
 
 }

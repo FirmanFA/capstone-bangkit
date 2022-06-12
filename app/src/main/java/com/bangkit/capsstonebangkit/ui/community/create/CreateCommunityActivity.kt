@@ -26,14 +26,6 @@ class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
         super.onCreate(savedInstanceState)
 
 
-//        val clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-//        val clipData = ClipData.newPlainText("code", "123456")
-//        clipboardManager.setPrimaryClip(clipData)
-
-//        val image = Glide.with(this).load("oke").submit()
-//        if (image.isDone){
-//            binding.imvBack.background = image.get()
-//        }
 
         createCommunityViewModel.createCommunityResponse.observe(this) {
             when (it.status) {
@@ -46,6 +38,11 @@ class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
                         200 -> {
                             Toast.makeText(this, "Komunitas berhasil dibuat", Toast.LENGTH_SHORT)
                                 .show()
+                            val intent = Intent(this, CommunityActivity::class.java)
+                            intent.putExtra("community_id", it.data.body()?.idCommunity)
+                            intent.putExtra("user_role", "admin")
+                            startActivity(intent)
+                            finish()
                             //go to community page
                         }
 
@@ -69,6 +66,11 @@ class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
                             Toast.makeText(this, "Berhasil join komunitas", Toast.LENGTH_SHORT)
                                 .show()
                             //go to community page
+                            val intent = Intent(this, CommunityActivity::class.java)
+                            intent.putExtra("community_id", it.data.body()?.idCommunity)
+                            intent.putExtra("user_role", "member")
+                            startActivity(intent)
+                            finish()
                         }
 
                     }
@@ -97,8 +99,6 @@ class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
         }
 
         binding.btnJoin.setOnClickListener {
-
-
 
             val token = binding.etCode.editText?.text.toString()
             val createRequest =

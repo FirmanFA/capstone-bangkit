@@ -97,7 +97,6 @@
                         android:gravity="center"
                         android:hint="MASUKKAN KODE"
                         android:importantForAutofill="no"
-                        android:inputType="number"
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="10dp"

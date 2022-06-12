@@ -98,6 +98,7 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
                         //sukses
                         200 ->{
                             Toast.makeText(this, "sukses", Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                         //username sudah ada
                         400 ->{

@@ -123,7 +123,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             val intent = Intent(this, CommunityActivity::class.java)
             startActivity(intent)
         }
-        binding.btnRehatEdukasi.setOnClickListener {
+        binding.cvNewCommunity.setOnClickListener {
             val intent = Intent(this, CreateCommunityActivity::class.java)
             startActivity(intent)
         }
@@ -132,9 +132,12 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
     }
 
     private fun showCommunityList(communities: List<CommunityResponse.Community>?) {
+
         val adapter= CommunityAdapter {
-//            val action = HomeFragmentDirections.actionHomeFragmentToDetailMovieFragment(it.id)
-//            findNavController().navigate(action)
+            val intent = Intent(this, CommunityActivity::class.java)
+            intent.putExtra("community_id", it.idCommunity)
+            intent.putExtra("user_role", it.userRole)
+            startActivity(intent)
         }
         adapter.submitList(communities)
         binding.rvCommunity.adapter = adapter

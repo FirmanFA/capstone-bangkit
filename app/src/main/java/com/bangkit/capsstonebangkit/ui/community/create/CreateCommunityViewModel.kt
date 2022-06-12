@@ -8,22 +8,23 @@ import com.bangkit.capsstonebangkit.data.Resource
 import com.bangkit.capsstonebangkit.data.api.model.CommunityCreateRequest
 import com.bangkit.capsstonebangkit.data.api.model.CommunityJoinRequest
 import com.bangkit.capsstonebangkit.data.api.model.CommunityCreateResponse
+import com.bangkit.capsstonebangkit.data.api.model.CommunityJoinResponse
 import com.bangkit.capsstonebangkit.repository.CommunityRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class CreateCommunityViewModel(private val repository: CommunityRepository): ViewModel() {
 
-    private val _joinCommunityResponse = MutableLiveData<Resource<Response<CommunityCreateResponse>>>()
-    val joinCommunityResponse: LiveData<Resource<Response<CommunityCreateResponse>>> get() = _joinCommunityResponse
+    private val _joinCommunityResponse = MutableLiveData<Resource<Response<CommunityJoinResponse>>>()
+    val joinCommunityResponse: LiveData<Resource<Response<CommunityJoinResponse>>> get() = _joinCommunityResponse
 
     fun joinCommunity(request: CommunityJoinRequest){
 
         viewModelScope.launch {
             _joinCommunityResponse.postValue(Resource.loading())
             try {
-                val dataProfile = repository.joinCommunity(request = request)
-                val successResource = Resource.success(dataProfile)
+                val dataJoinCommunity = repository.joinCommunity(request = request)
+                val successResource = Resource.success(dataJoinCommunity)
                 _joinCommunityResponse.postValue(successResource)
             }catch (exp: Exception){
                 _joinCommunityResponse.postValue(Resource.error(exp.localizedMessage ?: "Error occured"))

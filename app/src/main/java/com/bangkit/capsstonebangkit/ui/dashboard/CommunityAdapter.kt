@@ -20,6 +20,9 @@ class CommunityAdapter(private val onClick:(CommunityResponse.Community)->Unit)
 
             binding.apply {
                 btnCommunityName.text = currentCommunity.name
+                root.setOnClickListener {
+                    onClick(currentCommunity)
+                }
             }
 
         }

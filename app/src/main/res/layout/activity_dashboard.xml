@@ -305,8 +305,12 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_new_community"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         app:cardCornerRadius="20dp"
                         app:cardBackgroundColor="@color/dark_2">
 
@@ -322,7 +326,7 @@
                                 android:layout_marginHorizontal="16dp"
                                 android:text="Daftar Komunitasmu"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 app:layout_constraintBottom_toTopOf="@+id/textView11"
                                 app:layout_constraintEnd_toStartOf="@id/img_fist"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -334,9 +338,9 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/poppins"
                                 android:layout_marginHorizontal="16dp"
-                                android:text="Pantau komunitasmu"
+                                android:text="Pantau kualitas tidurmu agar produktif setiap waktu!"
                                 android:textColor="@color/white"
-                                android:textSize="14sp"
+                                android:textSize="12sp"
                                 app:layout_constraintBottom_toBottomOf="@+id/img_fist"
                                 app:layout_constraintEnd_toStartOf="@id/img_fist"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -365,8 +369,11 @@
                         android:id="@+id/rv_community"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:orientation="vertical"
                         android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"/>
+                        android:layout_marginBottom="8dp"
+                        tools:listitem="@layout/community_list_layout"/>
 
                 </LinearLayout>
 

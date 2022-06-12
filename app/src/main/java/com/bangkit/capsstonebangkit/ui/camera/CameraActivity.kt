@@ -8,6 +8,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.camera.core.*
 import androidx.camera.core.ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY
@@ -18,14 +19,21 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toFile
 import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.application.MyApp
+import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.databinding.ActivityCameraBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
+import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultViewModel
+import com.bumptech.glide.Glide
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
 import com.google.mlkit.vision.face.FaceLandmark
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -34,6 +42,8 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
 
     override fun getViewBinding() = ActivityCameraBinding.inflate(layoutInflater)
 
+    private val analysisResultViewModel by viewModel<AnalysisResultViewModel>()
+
     private var imageCapture: ImageCapture? = null
 
     private lateinit var cameraExecutor: ExecutorService
@@ -41,6 +51,38 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        analysisResultViewModel.analysisResultResponse.observe(this) {
+            when (it.status) {
+
+                Status.LOADING -> {
+                    binding.pgCamera.visibility = View.VISIBLE
+                    binding.btnKlik.visibility = View.INVISIBLE
+                }
+
+                Status.SUCCESS -> {
+                    binding.pgCamera.visibility = View.GONE
+                    binding.btnKlik.visibility = View.VISIBLE
+                    when (it.data?.code()) {
+                        //sukses
+                        200 -> {
+                            val data = it.data.body()
+                            val intent = Intent(this, AnalysisResultActivity::class.java)
+                            intent.putExtra("analysis_result", data)
+                            startActivity(intent)
+                        }
+
+                    }
+                }
+
+                Status.ERROR -> {
+                    binding.pgCamera.visibility = View.GONE
+                    binding.btnKlik.visibility = View.VISIBLE
+                    Log.d(TAG, "onCreate: ${it.message}")
+                }
+
+            }
+        }
 
         val highAccuracyOpts = FaceDetectorOptions.Builder()
             .setPerformanceMode(FaceDetectorOptions.PERFORMANCE_MODE_ACCURATE)
@@ -68,17 +110,33 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
             imageCapture?.takePicture(outputFileOptions, cameraExecutor,
                 object : ImageCapture.OnImageSavedCallback {
                     override fun onError(error: ImageCaptureException) {
-                        Toast.makeText(this@CameraActivity, "coba lagi", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@CameraActivity,
+                            error.message+" Coba lagi",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         Log.d(TAG, "onImageSaved: ${outputFileResults.savedUri}")
                         //do request to api
+
+                        if (outputFileResults.savedUri !=null){
+                            val imageFile = outputFileResults.savedUri!!.toFile()
+
+                            val requestImage =
+                                imageFile.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                            Log.d(TAG, "onImageSaved: $requestImage")
+                            val imageBody = MultipartBody.Part.createFormData(
+                                "image",
+                                imageFile.name, requestImage
+                            )
+                            analysisResultViewModel.postAnalysis(imageBody)
+
+                        }
+
                     }
                 })
-
-            val intent = Intent(this, AnalysisResultActivity::class.java)
-            startActivity(intent)
         }
 
 
@@ -102,7 +160,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                     )
                     binding.btnKlik.isEnabled = false
 
-                }else{
+                } else {
                     binding.btnKlik.background = ResourcesCompat.getDrawable(
                         resources,
                         R.drawable.dashboard_nav_bar_button_background,
