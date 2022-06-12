@@ -1,19 +1,15 @@
 package com.bangkit.capsstonebangkit.ui.community.member
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bangkit.capsstonebangkit.R
+import androidx.fragment.app.Fragment
 import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.model.CommunityDetailResponse
 import com.bangkit.capsstonebangkit.databinding.FragmentCommunityMemberBinding
-import com.bangkit.capsstonebangkit.ui.community.CommunityActivity
 import com.bangkit.capsstonebangkit.ui.community.CommunityViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CommunityMemberFragment : Fragment() {
 
@@ -64,7 +60,7 @@ class CommunityMemberFragment : Fragment() {
     }
 
     private fun showMemberList(members: List<CommunityDetailResponse.Member>?) {
-        val adapter= CommunityMemberAdapter()
+        val adapter = CommunityMemberAdapter()
         adapter.submitList(members)
         binding.rvMember.adapter = adapter
     }

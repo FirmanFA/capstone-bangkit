@@ -1,15 +1,12 @@
 package com.bangkit.capsstonebangkit.ui.analysis
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.View
-import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.model.PredictResponse
 import com.bangkit.capsstonebangkit.databinding.ActivityAnalysisResultBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bumptech.glide.Glide
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
 
@@ -20,16 +17,27 @@ class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.imvBack.setOnClickListener {
+            onBackPressed()
+        }
+
         val analysisResult = intent.getParcelableExtra<PredictResponse>("analysis_result")
 
-        binding.sbEyesSlider.setOnTouchListener { _, _ -> true }
-        binding.sbHangingEyes.setOnTouchListener { _, _ -> true }
 
+        val current = Calendar.getInstance().time
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val formatted = sdf.format(current)
 
         Glide.with(this).load(analysisResult?.prediction?.image).into(binding.imgFace)
+        binding.apply {
+            tvTime.text = formatted
+            tvEyeLidResult.text = analysisResult?.prediction?.eyelidCondition
+            tvEyeBagResult.text = analysisResult?.prediction?.eyebagCondition
+            tvHeader.text = analysisResult?.prediction?.finalCondition?.header
+            tvDetail.text = analysisResult?.prediction?.finalCondition?.detail
+        }
 
-
-        binding.sbHangingEyes.progress = 30
 
 
 

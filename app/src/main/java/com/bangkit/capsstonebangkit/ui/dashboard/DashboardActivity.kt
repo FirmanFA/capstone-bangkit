@@ -2,23 +2,20 @@ package com.bangkit.capsstonebangkit.ui.dashboard
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.viewpager2.widget.ViewPager2
+import androidx.preference.PreferenceManager
 import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.model.CommunityResponse
 import com.bangkit.capsstonebangkit.databinding.ActivityDashboardBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
-import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
 import com.bangkit.capsstonebangkit.ui.camera.CameraActivity
 import com.bangkit.capsstonebangkit.ui.community.CommunityActivity
 import com.bangkit.capsstonebangkit.ui.community.create.CreateCommunityActivity
+import com.bangkit.capsstonebangkit.ui.login.LoginActivity
 import com.bangkit.capsstonebangkit.utils.HorizontalMarginItemDecoration
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.abs
 
 class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
@@ -80,15 +77,16 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         dashboardViewModel.getCommunities()
 
 
-//        binding.button.setOnClickListener {
-//            PreferenceManager
-//                .getDefaultSharedPreferences(this)
-//                .edit()
-//                .clear()
-//                .apply()
-//
-//            finish()
-//        }
+        binding.btnLogout.setOnClickListener {
+            PreferenceManager
+                .getDefaultSharedPreferences(this)
+                .edit()
+                .clear()
+                .apply()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         val listImage = listOf(
             R.drawable.dashboard_banner_image_1,
@@ -120,8 +118,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
         binding.btnRehatHelp.setOnClickListener {
-            val intent = Intent(this, CommunityActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, CommunityActivity::class.java)
+//            startActivity(intent)
         }
         binding.cvNewCommunity.setOnClickListener {
             val intent = Intent(this, CreateCommunityActivity::class.java)
@@ -129,6 +127,11 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
 
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        dashboardViewModel.getCommunities()
     }
 
     private fun showCommunityList(communities: List<CommunityResponse.Community>?) {

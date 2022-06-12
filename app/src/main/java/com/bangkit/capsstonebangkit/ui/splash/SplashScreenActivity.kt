@@ -2,7 +2,6 @@ package com.bangkit.capsstonebangkit.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -14,11 +13,8 @@ import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.cookiesKey
 import com.bangkit.capsstonebangkit.databinding.ActivitySplashScreenBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
-import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
 import com.bangkit.capsstonebangkit.ui.dashboard.DashboardActivity
 import com.bangkit.capsstonebangkit.ui.onboarding.OnBoardingActivity
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")

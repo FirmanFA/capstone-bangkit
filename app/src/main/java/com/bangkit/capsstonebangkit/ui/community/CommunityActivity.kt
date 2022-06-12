@@ -3,6 +3,7 @@ package com.bangkit.capsstonebangkit.ui.community
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -23,10 +24,14 @@ class CommunityActivity : BaseActivity<ActivityCommunityBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val communityId = intent.getIntExtra("community_id",0)
+        binding.imvBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        val communityId = intent.getIntExtra("community_id", 0)
         val userRole = intent.getStringExtra("user_role")
 
-        if (userRole == "member"){
+        if (userRole == "member") {
             binding.btnSetting.visibility = View.GONE
         }
 
@@ -39,8 +44,17 @@ class CommunityActivity : BaseActivity<ActivityCommunityBinding>() {
                     when (it.data?.code()) {
                         //sukses
                         200 -> {
+
+                            val data = it.data.body()
+                            val hue = data?.colors?.get(0)?.hue?.toFloat() ?: 190f
+                            val satruation =
+                                data?.colors?.get(0)?.saturation?.dropLast(1)?.toFloat() ?: 89f
+                            val light = data?.colors?.get(0)?.light?.dropLast(1)?.toFloat() ?: 35f
+                            val bgColor = Color.HSVToColor(floatArrayOf(hue, satruation, light))
+
                             binding.apply {
                                 tvToken.text = it.data.body()?.community?.get(0)?.token
+                                binding.tvCommunityName.setBackgroundColor(bgColor)
                             }
                         }
 

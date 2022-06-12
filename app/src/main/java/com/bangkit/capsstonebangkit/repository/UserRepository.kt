@@ -3,7 +3,6 @@ package com.bangkit.capsstonebangkit.repository
 import com.bangkit.capsstonebangkit.data.api.ApiHelper
 import com.bangkit.capsstonebangkit.data.api.model.ForgetPasswordRequest
 import com.bangkit.capsstonebangkit.data.api.model.LoginRequest
-import com.bangkit.capsstonebangkit.data.api.model.RegisterRequest
 import com.bangkit.capsstonebangkit.data.api.model.UpdatePasswordRequest
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

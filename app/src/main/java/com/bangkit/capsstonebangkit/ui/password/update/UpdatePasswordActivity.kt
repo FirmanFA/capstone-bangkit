@@ -3,7 +3,6 @@ package com.bangkit.capsstonebangkit.ui.password.update
 import android.os.Bundle
 import android.widget.Toast
 import com.bangkit.capsstonebangkit.data.Status
-import com.bangkit.capsstonebangkit.data.api.model.ForgetPasswordRequest
 import com.bangkit.capsstonebangkit.data.api.model.UpdatePasswordRequest
 import com.bangkit.capsstonebangkit.databinding.ActivityUpdatePasswordBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
@@ -25,8 +24,8 @@ class UpdatePasswordActivity : BaseActivity<ActivityUpdatePasswordBinding>() {
 
         //get token via dropping first 43 character (http://localhost:4000/reset-password?token=)
         val token = url.drop(43)
-        //get token via split string
-        val token2 = url.split("token=")[1]
+//        //get token via split string
+//        val token2 = url.split("token=")[1]
 
         updatePasswordViewModel.updatePasswordResponse.observe(this){
             when(it.status){

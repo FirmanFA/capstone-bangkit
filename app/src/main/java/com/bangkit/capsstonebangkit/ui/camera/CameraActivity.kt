@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,18 +17,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toFile
 import com.bangkit.capsstonebangkit.R
-import com.bangkit.capsstonebangkit.application.MyApp
 import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.databinding.ActivityCameraBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultActivity
 import com.bangkit.capsstonebangkit.ui.analysis.AnalysisResultViewModel
-import com.bumptech.glide.Glide
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetector
 import com.google.mlkit.vision.face.FaceDetectorOptions
-import com.google.mlkit.vision.face.FaceLandmark
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -70,6 +66,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                             val intent = Intent(this, AnalysisResultActivity::class.java)
                             intent.putExtra("analysis_result", data)
                             startActivity(intent)
+                            finish()
                         }
 
                     }
@@ -171,7 +168,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
 
 
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
                 // Task failed with an exception
                 // ...
             }
@@ -212,6 +209,7 @@ class CameraActivity : BaseActivity<ActivityCameraBinding>() {
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture, imageAnalyzer
                 )
+
 
             } catch (exc: Exception) {
                 Log.e(TAG, "Use case binding failed", exc)

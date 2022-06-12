@@ -2,7 +2,6 @@ package com.bangkit.capsstonebangkit.ui.community.member
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.GenericLifecycleObserver
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView

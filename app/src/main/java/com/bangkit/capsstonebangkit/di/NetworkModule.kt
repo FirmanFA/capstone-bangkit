@@ -3,15 +3,12 @@ package com.bangkit.capsstonebangkit.di
 import com.bangkit.capsstonebangkit.data.api.ApiHelper
 import com.bangkit.capsstonebangkit.data.api.ApiService
 import com.bangkit.capsstonebangkit.data.api.setCookieStore
-import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.net.CookieManager
-import java.util.concurrent.TimeUnit
 
 private const val BASE_URL = "https://rehatapi-6aa42ekb5a-et.a.run.app/"
 val networkModule = module {

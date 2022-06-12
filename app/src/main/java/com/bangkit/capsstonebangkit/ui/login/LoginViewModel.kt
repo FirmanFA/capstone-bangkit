@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.bangkit.capsstonebangkit.data.Resource
 import com.bangkit.capsstonebangkit.data.api.model.LoginRequest
 import com.bangkit.capsstonebangkit.data.api.model.LoginResponse
-import com.bangkit.capsstonebangkit.data.api.model.SessionResponse
 import com.bangkit.capsstonebangkit.repository.UserRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response

@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/tab_onboarding" />
 
     <Button
         android:id="@+id/btn_register"
@@ -49,7 +49,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="64dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Monitoring kondisi tidur tim-mu"
@@ -62,8 +62,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="0dp"
-        android:layout_height="420dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/dark"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
@@ -77,17 +78,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_onboarding"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/dark"
-            app:tabBackground="@drawable/tab_page_selector"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp"
-            android:layout_gravity="bottom" />
     </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_onboarding"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/dark"
+        app:tabBackground="@drawable/tab_page_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

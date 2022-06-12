@@ -1,8 +1,5 @@
 package com.bangkit.capsstonebangkit.ui.community.create
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,7 +10,6 @@ import com.bangkit.capsstonebangkit.data.api.model.CommunityJoinRequest
 import com.bangkit.capsstonebangkit.databinding.ActivityCreateCommunityBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.community.CommunityActivity
-import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
@@ -25,6 +21,9 @@ class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.imvBack.setOnClickListener {
+            onBackPressed()
+        }
 
 
         createCommunityViewModel.createCommunityResponse.observe(this) {
@@ -71,6 +70,11 @@ class CreateCommunityActivity : BaseActivity<ActivityCreateCommunityBinding>() {
                             intent.putExtra("user_role", "member")
                             startActivity(intent)
                             finish()
+                        }
+
+                        403 -> {
+                            Toast.makeText(this, "Anda adalah admin!", Toast.LENGTH_SHORT)
+                                .show()
                         }
 
                     }

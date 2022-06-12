@@ -18,7 +18,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.net.toFile
 import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.databinding.ActivityRegisterBinding

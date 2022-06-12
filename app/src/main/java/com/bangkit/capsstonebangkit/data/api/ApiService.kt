@@ -17,8 +17,6 @@ interface ApiService {
         @Part image: MultipartBody.Part
     ): Response<RegisterResponse>
 
-//    suspend fun postRegister(@Body request: RegisterRequest): Response<RegisterResponse>
-
     @POST("api/auth/signin")
     suspend fun postLogin(@Body request: LoginRequest): Response<LoginResponse>
 

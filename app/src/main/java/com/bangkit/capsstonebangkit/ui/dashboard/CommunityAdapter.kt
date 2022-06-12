@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.capsstonebangkit.data.api.model.CommunityResponse
 import com.bangkit.capsstonebangkit.databinding.CommunityListLayoutBinding
-import com.bumptech.glide.Glide
 
 class CommunityAdapter(private val onClick:(CommunityResponse.Community)->Unit)
     : ListAdapter<CommunityResponse.Community, CommunityAdapter.ViewHolder>(CommunityComparator()) {
