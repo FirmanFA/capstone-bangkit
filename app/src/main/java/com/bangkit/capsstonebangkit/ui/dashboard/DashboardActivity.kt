@@ -13,6 +13,7 @@ import com.bangkit.capsstonebangkit.ui.camera.CameraActivity
 import com.bangkit.capsstonebangkit.ui.community.CommunityActivity
 import com.bangkit.capsstonebangkit.ui.community.create.CreateCommunityActivity
 import com.bangkit.capsstonebangkit.ui.login.LoginActivity
+import com.bangkit.capsstonebangkit.ui.editprofile.EditProfileActivity
 import com.bangkit.capsstonebangkit.utils.HorizontalMarginItemDecoration
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
@@ -137,6 +138,10 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
             startActivity(intent)
         }
 
+        binding.btnEdit.setOnClickListener {
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

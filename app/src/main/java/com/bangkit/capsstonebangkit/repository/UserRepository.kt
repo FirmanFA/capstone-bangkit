@@ -4,6 +4,7 @@ import com.bangkit.capsstonebangkit.data.api.ApiHelper
 import com.bangkit.capsstonebangkit.data.api.model.ForgetPasswordRequest
 import com.bangkit.capsstonebangkit.data.api.model.LoginRequest
 import com.bangkit.capsstonebangkit.data.api.model.UpdatePasswordRequest
+import com.bangkit.capsstonebangkit.data.api.model.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -28,5 +29,8 @@ class UserRepository(private val apiHelper: ApiHelper) {
     suspend fun checkSession() = apiHelper.checkSession()
 
     suspend fun getProfile() = apiHelper.getProfile()
+
+    suspend fun postEditProfile(request : ProfileEditRequest) =
+        apiHelper.postEditProfile(request)
 
 }

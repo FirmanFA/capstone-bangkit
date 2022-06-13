@@ -26,6 +26,12 @@
             android:name=".ui.RehatPlaceholderActivity"
             android:exported="false" />
         <activity
+            android:name=".test"
+            android:exported="false" />
+        <activity
+            android:name=".ui.editprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.community.create.CreateCommunityActivity"
             android:exported="false" />
         <activity

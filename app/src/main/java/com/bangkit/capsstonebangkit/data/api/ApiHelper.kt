@@ -25,6 +25,9 @@ class ApiHelper(private val apiService: ApiService) {
 
     suspend fun getProfile() = apiService.getProfile()
 
+    suspend fun postEditProfile(request: ProfileEditRequest) =
+        apiService.postEditProfile(request)
+
     //analysis
     suspend fun postPredict(image: MultipartBody.Part) = apiService.postPredict(image)
 
