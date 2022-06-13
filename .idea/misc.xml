@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_analysis_result.xml" value="0.296195652173913" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_community.xml" value="0.296195652173913" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_dashboard.xml" value="0.33" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_edit_profile.xml" value="0.25" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_forget_password.xml" value="0.67" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/alsto/AndroidStudioProjects/capstone-bangkit-lutfi/app/src/main/res/layout/activity_test.xml" value="0.14177598385469223" />
         <entry key="..\:/Users/fafir/AndroidStudioProjects/CapsstoneBangkit/app/src/main/res/drawable/camera_border_shape_circular.xml" value="0.139" />
         <entry key="..\:/Users/fafir/AndroidStudioProjects/CapsstoneBangkit/app/src/main/res/drawable/camera_button_inactive.xml" value="0.1405" />
         <entry key="..\:/Users/fafir/AndroidStudioProjects/CapsstoneBangkit/app/src/main/res/drawable/dashboard_button_background.xml" value="0.14" />
@@ -38,7 +45,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

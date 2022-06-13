@@ -12,5 +12,4 @@ val repositoryModule = module {
     singleOf(::CommunityRepository)
     singleOf(::DashboardRepository)
     singleOf(::AnalysisRepository)
-
 }
