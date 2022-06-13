@@ -1,6 +1,7 @@
 package com.bangkit.capsstonebangkit.ui.analysis
 
 import android.os.Bundle
+import android.widget.Toast
 import com.bangkit.capsstonebangkit.data.api.model.PredictResponse
 import com.bangkit.capsstonebangkit.databinding.ActivityAnalysisResultBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
@@ -27,6 +28,9 @@ class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
 
         val analysisResult = intent.getParcelableExtra<PredictResponse>("analysis_result")
 
+        binding.imvSave.setOnClickListener {
+            Toast.makeText(this, "Data telah berhasil didownload", Toast.LENGTH_SHORT).show()
+        }
 
         val current = Calendar.getInstance().time
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark"
@@ -115,12 +116,13 @@
             android:id="@+id/tv_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Tidur 8 jam di hari libur mungkin menjadi solusi"
             android:textAlignment="viewStart"
             android:textColor="@color/white"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/imv_save"
             app:layout_constraintEnd_toEndOf="@+id/tv_header"
             app:layout_constraintStart_toStartOf="@+id/tv_header"
             app:layout_constraintTop_toBottomOf="@+id/tv_header"
@@ -195,6 +197,17 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ImageView
+            android:id="@+id/imv_save"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ic_baseline_save_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:tint="@color/light_2"
+            tools:srcCompat="@drawable/ic_baseline_save_24" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
