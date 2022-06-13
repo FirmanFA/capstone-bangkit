@@ -1,10 +1,8 @@
 package com.bangkit.capsstonebangkit.ui.editprofile
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.bangkit.capsstonebangkit.R
 import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.model.ProfileEditRequest
 import com.bangkit.capsstonebangkit.data.api.model.ProfileResponse
@@ -13,7 +11,6 @@ import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bangkit.capsstonebangkit.ui.dashboard.DashboardViewModel
 import com.bumptech.glide.Glide
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.math.log
 
 class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>() {
 
@@ -23,6 +20,10 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding.btnFinanceBackhome.setOnClickListener {
+            onBackPressed()
+        }
 
         dashboardViewModel.getProfile()
         dashboardViewModel.profileResponse.observe(this){
@@ -81,10 +82,6 @@ class EditProfileActivity : BaseActivity<ActivityEditProfileBinding>() {
         }
 
 
-    }
-
-    override fun onBackPressed() {
-        finishAffinity()
     }
 
 }

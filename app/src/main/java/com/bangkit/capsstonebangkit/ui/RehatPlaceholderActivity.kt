@@ -1,8 +1,8 @@
 package com.bangkit.capsstonebangkit.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.capsstonebangkit.R
 
 class RehatPlaceholderActivity : AppCompatActivity() {

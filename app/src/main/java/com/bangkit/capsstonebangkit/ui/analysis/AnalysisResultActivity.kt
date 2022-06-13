@@ -5,6 +5,8 @@ import com.bangkit.capsstonebangkit.data.api.model.PredictResponse
 import com.bangkit.capsstonebangkit.databinding.ActivityAnalysisResultBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
 import com.bumptech.glide.Glide
+import java.math.RoundingMode
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,16 +33,19 @@ class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
         val formatted = sdf.format(current)
 
+        val df = DecimalFormat("#.##")
+        df.roundingMode = RoundingMode.CEILING
+
         Glide.with(this).load(analysisResult?.prediction?.image).into(binding.imgFace)
         binding.apply {
             tvTime.text = formatted
             tvHangingEyes.text = "Eye Lid: ${analysisResult?.prediction?.eyelidCondition} ${
-                analysisResult?.prediction?.probEyelid?.times(100)
+                df.format(analysisResult?.prediction?.probEyelid)
             }"
             sbHangingEyes.progress =
                 (analysisResult?.prediction?.probEyelid?.times(100))?.toInt() ?: 0
             tvEyesBag.text = "Eye Bag: ${analysisResult?.prediction?.eyebagCondition} ${
-                analysisResult?.prediction?.probEyebag?.times(100)
+                df.format(analysisResult?.prediction?.probEyebag)
             }"
             sbEyesSlider.progress =
                 (analysisResult?.prediction?.probEyebag?.times(100))?.toInt() ?: 0
