@@ -13,13 +13,15 @@ class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
     override fun getViewBinding() = ActivityAnalysisResultBinding.inflate(layoutInflater)
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.imvBack.setOnClickListener {
             onBackPressed()
         }
+
+        binding.sbEyesSlider.setOnTouchListener { _, _ -> true }
+        binding.sbHangingEyes.setOnTouchListener { _, _ -> true }
 
         val analysisResult = intent.getParcelableExtra<PredictResponse>("analysis_result")
 
@@ -32,15 +34,25 @@ class AnalysisResultActivity : BaseActivity<ActivityAnalysisResultBinding>() {
         Glide.with(this).load(analysisResult?.prediction?.image).into(binding.imgFace)
         binding.apply {
             tvTime.text = formatted
-            tvEyeLidResult.text = analysisResult?.prediction?.eyelidCondition
-            tvEyeBagResult.text = analysisResult?.prediction?.eyebagCondition
+            tvHangingEyes.text = "Eye Lid: ${analysisResult?.prediction?.eyelidCondition} ${
+                analysisResult?.prediction?.probEyelid?.times(100)
+            }"
+            sbHangingEyes.progress =
+                (analysisResult?.prediction?.probEyelid?.times(100))?.toInt() ?: 0
+            tvEyesBag.text = "Eye Bag: ${analysisResult?.prediction?.eyebagCondition} ${
+                analysisResult?.prediction?.probEyebag?.times(100)
+            }"
+            sbEyesSlider.progress =
+                (analysisResult?.prediction?.probEyebag?.times(100))?.toInt() ?: 0
+
+            val calc =
+                (analysisResult?.prediction?.finalCondition?.probability?.times(100))?.toInt() ?: 0
+            tvFinalResult.text = "$calc%"
+//            tvEyeLidResult.text = analysisResult?.prediction?.eyelidCondition
+//            tvEyeBagResult.text = analysisResult?.prediction?.eyebagCondition
             tvHeader.text = analysisResult?.prediction?.finalCondition?.header
             tvDetail.text = analysisResult?.prediction?.finalCondition?.detail
         }
-
-
-
-
 
 
     }

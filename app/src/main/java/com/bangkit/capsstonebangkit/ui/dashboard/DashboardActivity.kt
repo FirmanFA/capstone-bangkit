@@ -8,6 +8,7 @@ import com.bangkit.capsstonebangkit.data.Status
 import com.bangkit.capsstonebangkit.data.api.model.CommunityResponse
 import com.bangkit.capsstonebangkit.databinding.ActivityDashboardBinding
 import com.bangkit.capsstonebangkit.ui.BaseActivity
+import com.bangkit.capsstonebangkit.ui.RehatPlaceholderActivity
 import com.bangkit.capsstonebangkit.ui.camera.CameraActivity
 import com.bangkit.capsstonebangkit.ui.community.CommunityActivity
 import com.bangkit.capsstonebangkit.ui.community.create.CreateCommunityActivity
@@ -90,8 +91,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
         val listImage = listOf(
             R.drawable.dashboard_banner_image_1,
-            R.drawable.dashboard_banner_image_1,
-            R.drawable.dashboard_banner_image_1,
+            R.drawable.adsense,
+            R.drawable.adsense,
         )
 
 
@@ -118,9 +119,19 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
         }
 
         binding.btnRehatHelp.setOnClickListener {
-//            val intent = Intent(this, CommunityActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, RehatPlaceholderActivity::class.java)
+            intent.putExtra("image" , R.drawable.app_flow)
+            intent.putExtra("from" , 1)
+            startActivity(intent)
         }
+
+        binding.btnRehatEdukasi.setOnClickListener {
+            val intent = Intent(this, RehatPlaceholderActivity::class.java)
+            intent.putExtra("image" , R.drawable.edukasi_placeholder)
+            intent.putExtra("from" , 2)
+            startActivity(intent)
+        }
+
         binding.cvNewCommunity.setOnClickListener {
             val intent = Intent(this, CreateCommunityActivity::class.java)
             startActivity(intent)
@@ -138,7 +149,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>() {
 
         val adapter= CommunityAdapter {
             val intent = Intent(this, CommunityActivity::class.java)
-            intent.putExtra("community_id", it.idCommunity)
+            intent.putExtra("community_id", it.id)
             intent.putExtra("user_role", it.userRole)
             startActivity(intent)
         }

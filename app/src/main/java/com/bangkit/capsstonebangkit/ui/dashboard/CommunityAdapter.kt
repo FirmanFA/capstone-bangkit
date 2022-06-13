@@ -1,5 +1,7 @@
 package com.bangkit.capsstonebangkit.ui.dashboard
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -17,11 +19,17 @@ class CommunityAdapter(private val onClick:(CommunityResponse.Community)->Unit)
         fun bind(currentCommunity: CommunityResponse.Community,
                  onClick: (CommunityResponse.Community) -> Unit){
 
+            val hue = currentCommunity.hue?.toFloat() ?: 190f
+            val satruation =
+                currentCommunity.saturation?.dropLast(1)?.toFloat() ?: 89f
+            val light = currentCommunity.light?.dropLast(1)?.toFloat() ?: 35f
+            val bgColor = Color.HSVToColor(floatArrayOf(hue, satruation, light))
             binding.apply {
                 btnCommunityName.text = currentCommunity.name
                 root.setOnClickListener {
                     onClick(currentCommunity)
                 }
+                btnCommunityColor.backgroundTintList = ColorStateList.valueOf(bgColor)
             }
 
         }
