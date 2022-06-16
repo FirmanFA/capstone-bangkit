@@ -14,7 +14,7 @@ interface ApiService {
         @Part("username") username: RequestBody,
         @Part("email") email: RequestBody,
         @Part("password") password: RequestBody,
-        @Part image: MultipartBody.Part
+        @Part image: MultipartBody.Part?
     ): Response<RegisterResponse>
 
     @POST("api/auth/signin")

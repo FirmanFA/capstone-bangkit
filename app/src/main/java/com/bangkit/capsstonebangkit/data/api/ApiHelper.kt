@@ -10,7 +10,7 @@ class ApiHelper(private val apiService: ApiService) {
         username: RequestBody,
         email: RequestBody,
         password: RequestBody,
-        image: MultipartBody.Part
+        image: MultipartBody.Part?
     ) = apiService.postRegister(username, email, password, image)
 
     suspend fun postLogin(request: LoginRequest) = apiService.postLogin(request)

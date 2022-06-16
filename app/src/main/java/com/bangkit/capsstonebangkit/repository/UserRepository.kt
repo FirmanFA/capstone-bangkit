@@ -13,7 +13,7 @@ class UserRepository(private val apiHelper: ApiHelper) {
     suspend fun postRegister(username: RequestBody,
                              email: RequestBody,
                              password: RequestBody,
-                             image: MultipartBody.Part) = apiHelper.postRegister(username,
+                             image: MultipartBody.Part?) = apiHelper.postRegister(username,
                                                                                 email,
                                                                                 password,
                                                                                 image)

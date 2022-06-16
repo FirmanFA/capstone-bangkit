@@ -20,7 +20,7 @@ class RegisterViewModel(private val repository: UserRepository): ViewModel() {
     fun postRegister(username: RequestBody,
                      email: RequestBody,
                      password: RequestBody,
-                     image: MultipartBody.Part){
+                     image: MultipartBody.Part?){
         viewModelScope.launch {
             _registerResponse.postValue(Resource.loading())
             try {
